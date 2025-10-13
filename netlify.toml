@@ -1,0 +1,3 @@
+[build]
+  command = "pnpm install && pnpm build:staging:mock"
+  publish = "dist"
