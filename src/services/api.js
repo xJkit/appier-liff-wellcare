@@ -114,4 +114,21 @@ export default class API {
      */
     return this.GET(`/coupon/list?status=${status}&length=${length}`)
   }
+
+  /**
+   * Register a new member
+   * @typedef {import('../types').MemberRegisterInfo} MemberRegisterInfo
+   * @typedef {import('../types').MemberRegisterResult} MemberRegisterResult
+   * @param {MemberRegisterInfo} body - Member registration data
+   * @returns {Promise<MemberRegisterResult>}
+   */
+  registerMember = (
+    body = {
+      birthday: '', // ex: 1991-04-12
+      mobilePhone: '', // ex: +886966333222
+      name: '', // ex: 姓名
+    }
+  ) => {
+    return this.POST('/member/register', body)
+  }
 }

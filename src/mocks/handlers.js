@@ -7,6 +7,8 @@ export const handlers = [
 
   // Handles a GET /user request
   API.getMemberCard,
+  // Handles member registration
+  API.postRegisterMember,
   // Handles a OTP send from user
   API.postOtpSend,
   API.postOtpVerify,

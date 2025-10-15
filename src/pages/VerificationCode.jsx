@@ -9,6 +9,7 @@ import {
   useNavigation,
   redirect,
   Link,
+  useSearchParams,
 } from 'react-router-dom'
 import { PinInput } from '../components/Form'
 import checkSvg from '../assets/check.svg'
@@ -47,6 +48,7 @@ export const verificationAction = async ({ request }) => {
 }
 
 export default function VerificationCode() {
+  const [searchParams] = useSearchParams()
   const phoneMember = useLoaderData()
   const submit = useSubmit()
   const navigation = useNavigation()
@@ -58,6 +60,11 @@ export default function VerificationCode() {
   const { watch, control, handleSubmit, reset } = useForm({
     defaultValues: { pin: ['', '', '', '', '', ''] },
   })
+
+  const isFromCreateAccount = searchParams.get('from') === 'create_account'
+  const backLink = isFromCreateAccount
+    ? '/create_account'
+    : `../account_linking?card_number=${memberNumber}`
 
   const onCodeReset = () => {
     if (isCodeReset) return // prevent from multi-clicks
@@ -90,9 +97,7 @@ export default function VerificationCode() {
       </div>
       <div className="text-sm leading-5">
         <div className="">簡訊驗證碼已傳送到 {mobilePhone}</div>
-        <Link
-          to={`../account_linking?card_number=${memberNumber}`}
-          className="text-theme">
+        <Link to={backLink} className="text-theme">
           使用另外一支手機
         </Link>
       </div>

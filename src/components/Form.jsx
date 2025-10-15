@@ -94,7 +94,7 @@ export const PhoneInputNumber = forwardRef(
         type="text"
         placeholder={placeholder}
         className={cx(
-          'form-input block w-full border-0 border-b border-gray-200 focus:ring-0 focus:border-theme py-1 px-2 placeholder:text-content-low placeholder:text-lg text-[26px] font-semibold placeholder:font-normal tracking-wide leading-7 font-number',
+          'form-input block w-full h-[41px] border-0 border-b border-gray-200 focus:ring-0 focus:border-theme py-1 px-2 placeholder:text-content-low placeholder:text-lg text-[26px] font-semibold placeholder:font-normal tracking-wide leading-7 font-number',
           className,
           {
             'border-semantic-red focus:border-semantic-red': invalid,

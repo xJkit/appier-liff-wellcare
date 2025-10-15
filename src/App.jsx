@@ -17,6 +17,9 @@ import MyCoupons, {
   couponDetailLoaderWithQuery,
 } from './pages/MyCoupons'
 import ErrorPage from './pages/ErrorTemplate'
+import CreateAccount, {
+  registerAndSendOtpActionWithQuery,
+} from './pages/CreateAccount'
 
 const IS_DEV = import.meta.env.DEV
 const queryClient = new QueryClient()
@@ -34,6 +37,12 @@ const router = createBrowserRouter([
         path: 'account_linking',
         element: <AccountLinking />,
         action: sendOtpActionWithQuery(queryClient),
+        errorElement: <ErrorPage />,
+      },
+      {
+        path: 'create_account',
+        element: <CreateAccount />,
+        action: registerAndSendOtpActionWithQuery(queryClient),
         errorElement: <ErrorPage />,
       },
       {

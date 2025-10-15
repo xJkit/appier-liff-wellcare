@@ -11,6 +11,9 @@ export default function Home() {
     <>
       <h1 className="mb-4">Remove this page after GM</h1>
       <div className="flex flex-col gap-2">
+        <Link className="text-theme underline" to="create_account">
+          Create Account
+        </Link>
         <Link className="text-theme underline" to="account_linking">
           Account Linking 未綁定(default)
         </Link>

@@ -81,6 +81,54 @@ export const getMemberCard = rest.get('/member/card', (req, res, ctx) => {
   }
 })
 
+export const postRegisterMember = rest.post(
+  '/member/register',
+  async (req, res, ctx) => {
+    const token = req.headers.get('Authorization')
+    const body = await req.json()
+    console.table({ token, body })
+
+    const { name, birthday, mobilePhone } = body
+
+    let MOCK_STATE
+
+    const meta = {
+      code: '7',
+      message: 'register success',
+      memberNumber: '12345678', // 模擬生成的會員卡號
+    }
+
+    // 根據輸入值模擬不同錯誤情境
+    if (name === 'error101') {
+      MOCK_STATE = 'A101'
+    } else if (mobilePhone === '+886900000000') {
+      MOCK_STATE = 'A103'
+    }
+
+    await delay(1500) // 模擬註冊時間
+
+    switch (MOCK_STATE) {
+      case 'A101':
+        meta.code = MOCK_STATE
+        meta.message = 'Member data: member not exist.'
+        delete meta.memberNumber
+        return res(ctx.status(400), ctx.json(meta))
+      case 'A103':
+        meta.code = MOCK_STATE
+        meta.message = 'Bad request'
+        delete meta.memberNumber
+        return res(ctx.status(400), ctx.json(meta))
+      case '401':
+        meta.code = MOCK_STATE
+        meta.message = 'Line token Unauthorized'
+        delete meta.memberNumber
+        return res(ctx.status(401), ctx.json(meta))
+      default:
+        return res(ctx.status(200), ctx.json(meta))
+    }
+  }
+)
+
 export const postOtpSend = rest.post('/otp/send', async (req, res, ctx) => {
   const token = req.headers.get('Authorization')
   const body = await req.json()
